@@ -31,6 +31,7 @@
  
     <!-- Template Stylesheet -->
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/form-validation.css" %}">
 </head>
 
 <body>
@@ -90,30 +91,40 @@
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Register Here !</h5>
                         <h1 class="text-white mb-4">Create a new account and enjoy our meals</h1>
-                        <form method="post">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success" role="alert">
+                            <h3{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</h3>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form method="post" action="{% url "sign_up" %}">
+                            {% csrf_token %}
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
+                                        <input type="text" class="form-control" name="username" id="name" placeholder="Your Name" required>
+                                        <label for="name">Username</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                        <label for="email">Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="password" maxlength="8" class="form-control" id="email" placeholder="Your Password">
+                                        <input type="password" minlength="8" class="form-control" id="email" placeholder="Your Password" required>
                                         <label for="email">Password</label>
+                                        <p>Password must be at least 8 characters and using special symbols</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="password" maxlength="8" class="form-control" id="email" placeholder="Your Password">
+                                        <input type="password" minlength="8" class="form-control" name="password" id="email" placeholder="Your Password" required>
                                         <label for="email">Renter Password</label>
+                                        <p>Password must be at least 8 characters and using special symbols</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
