@@ -26,7 +26,6 @@ def sign_up(request):
 @unauthaticated_user
 def sign_in(request):
     if request.method == 'POST':
-        try:
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(username=username, password=password)
@@ -35,10 +34,10 @@ def sign_in(request):
                 success_msg = 'Successfully Logged in'
                 messages.success(request, success_msg)
                 return redirect('index')
-        except Exception as e:
-            error_msg = 'Error while Logging in'
-            messages.error(request, error_msg)
-            return redirect('sign_in')
+            else:
+                error_msg = 'Error while Logging in'
+                messages.error(request, error_msg)
+                return redirect('sign_in')
     return render(request, 'sign-in.html')
 
 @login_required(login_url='sign_in')
