@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . models import Booking_table
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from . models import Menu
 # Create your views here.
 @login_required(login_url='sign_in')
 def book_a_table(request):
@@ -26,4 +27,7 @@ def service(request):
     return render(request, 'service.html')
 
 def menu(request):
-    return render(request, 'menu.html')
+    menu_items = {
+        'items' : Menu.objects.all()
+    }
+    return render(request, 'menu.html', menu_items)

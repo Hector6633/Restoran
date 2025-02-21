@@ -10,3 +10,12 @@ class Booking_table(models.Model):
     def __str__(self):
         return self.customer_name
     
+class Menu(models.Model):
+    item_name = models.CharField(max_length=100)
+    item_price = models.CharField(max_length=100)
+    item_des = models.CharField(max_length=100)
+    item_img = models.ImageField(upload_to='static/img/menu')
+    
+    def __str__(self):
+        return self.item_name    
+    
