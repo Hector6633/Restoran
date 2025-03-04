@@ -47,7 +47,7 @@
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
-                <a href="" class="navbar-brand p-0">
+                <a href="{% url "index" %}" class="navbar-brand p-0">
                     <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -127,13 +127,33 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-select" id="select1">
-                                          <option name="people" value="1">People 1</option>
-                                          <option name="people" value="2">People 2</option>
-                                          <option name="people" value="3">People 3</option>
-                                          <option name="people" value="4">People 4</option>
+                                        <select class="form-select" name="people" required id="select1">
+                                          <option name="people" value="people 1">People 1</option>
+                                          <option name="people" value="people 2">People 2</option>
+                                          <option name="people" value="people 3">People 3</option>
+                                          <option name="people" value="people 4">People 4</option>
                                         </select>
                                         <label for="select1">No Of People</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="meal" id="select1">
+                                            {% for menu_item in menu_items %}
+                                          <option name="meal" value="{{menu_item.item_name}}">{{menu_item.item_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="select1">Food Item</label>
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="beverage" id="select1">
+                                            {% for beverage in beverages %}
+                                          <option name="beverage" value="{{beverage.product_name}}">{{beverage.product_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="select1">Beverages</label>
                                       </div>
                                 </div>
                                 <div class="col-12">
